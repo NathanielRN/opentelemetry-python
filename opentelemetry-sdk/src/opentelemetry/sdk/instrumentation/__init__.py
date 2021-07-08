@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+"""
+OpenTelemetry SDK Configurator for Easy Instrumentation with Distros
+"""
+
 import os
 from logging import getLogger
 from os import environ
@@ -146,19 +151,17 @@ def _initialize_components():
     _init_tracing(trace_exporters, id_generator)
 
 
-class Configurator(BaseConfigurator):
+class _OTelSDKConfigurator(BaseConfigurator):
+    """A basic Configurator by OTel Python for initalizing OTel SDK components
 
-    # pylint: disable=no-self-use
+    Initializes several crucial OTel SDK components (i.e. TracerProvider,
+    MeterProvider, Processors...) according to a default implementation. Other
+    Configurators can subclass and slightly alter this initialization.
+
+    NOTE: This class should not be instantiated nor should it become an entry
+    point on the `opentelemetry-sdk` package. Instead, distros should subclass
+    this Configurator and enchance it as needed.
+    """
+
     def _configure(self, **kwargs):
         _initialize_components()
-
-
-class OpenTelemetryDistro(BaseDistro):
-    """
-    The OpenTelemetry provided Distro configures a default set of
-    configuration out of the box.
-    """
-
-    # pylint: disable=no-self-use
-    def _configure(self, **kwargs):
-        os.environ.setdefault(OTEL_TRACES_EXPORTER, "otlp_proto_grpc_span")
