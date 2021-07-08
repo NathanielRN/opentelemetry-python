@@ -18,6 +18,10 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from opentelemetry import trace
+from opentelemetry.environment_variables import (
+    OTEL_PYTHON_ID_GENERATOR,
+    OTEL_TRACES_EXPORTER,
+)
 from opentelemetry.sdk.instrumentation import (
     EXPORTER_OTLP,
     EXPORTER_OTLP_SPAN,
@@ -25,10 +29,6 @@ from opentelemetry.sdk.instrumentation import (
     _get_id_generator,
     _import_id_generator,
     _init_tracing,
-)
-from opentelemetry.environment_variables import (
-    OTEL_PYTHON_ID_GENERATOR,
-    OTEL_TRACES_EXPORTER,
 )
 from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from opentelemetry.sdk.trace.id_generator import IdGenerator, RandomIdGenerator
