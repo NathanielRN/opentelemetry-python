@@ -30,8 +30,6 @@ from opentelemetry.environment_variables import (
     OTEL_TRACES_EXPORTER,
 )
 from opentelemetry.instrumentation.configurator import BaseConfigurator
-from opentelemetry.instrumentation.distro import BaseDistro
-from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor, SpanExporter
 from opentelemetry.sdk.trace.id_generator import IdGenerator

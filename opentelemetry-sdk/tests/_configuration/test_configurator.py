@@ -22,7 +22,7 @@ from opentelemetry.environment_variables import (
     OTEL_PYTHON_ID_GENERATOR,
     OTEL_TRACES_EXPORTER,
 )
-from opentelemetry.sdk.instrumentation import (
+from opentelemetry.sdk._configuration import (
     _EXPORTER_OTLP,
     _EXPORTER_OTLP_SPAN,
     _get_exporter_names,
@@ -87,10 +87,10 @@ class TestTraceInit(TestCase):
     def setUp(self):
         super()
         self.get_provider_patcher = patch(
-            "opentelemetry.sdk.instrumentation.TracerProvider", Provider
+            "opentelemetry.sdk._configuration.TracerProvider", Provider
         )
         self.get_processor_patcher = patch(
-            "opentelemetry.sdk.instrumentation.BatchSpanProcessor", Processor
+            "opentelemetry.sdk._configuration.BatchSpanProcessor", Processor
         )
         self.set_provider_patcher = patch(
             "opentelemetry.trace.set_tracer_provider"
@@ -143,8 +143,8 @@ class TestTraceInit(TestCase):
         )
 
     @patch.dict(environ, {OTEL_PYTHON_ID_GENERATOR: "custom_id_generator"})
-    @patch("opentelemetry.sdk.instrumentation.IdGenerator", new=IdGenerator)
-    @patch("opentelemetry.sdk.instrumentation.iter_entry_points")
+    @patch("opentelemetry.sdk._configuration.IdGenerator", new=IdGenerator)
+    @patch("opentelemetry.sdk._configuration.iter_entry_points")
     def test_trace_init_custom_id_generator(self, mock_iter_entry_points):
         mock_iter_entry_points.configure_mock(
             return_value=[
