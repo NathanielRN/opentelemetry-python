@@ -39,11 +39,11 @@ from opentelemetry.sdk.trace.id_generator import IdGenerator
 logger = getLogger(__file__)
 
 
-EXPORTER_OTLP = "otlp"
-EXPORTER_OTLP_SPAN = "otlp_proto_grpc_span"
+_EXPORTER_OTLP = "otlp"
+_EXPORTER_OTLP_SPAN = "otlp_proto_grpc_span"
 
-RANDOM_ID_GENERATOR = "random"
-_DEFAULT_ID_GENERATOR = RANDOM_ID_GENERATOR
+_RANDOM_ID_GENERATOR = "random"
+_DEFAULT_ID_GENERATOR = _RANDOM_ID_GENERATOR
 
 
 def _get_id_generator() -> str:
@@ -63,9 +63,9 @@ def _get_exporter_names() -> Sequence[str]:
             }
         )
 
-    if EXPORTER_OTLP in exporters:
-        exporters.remove(EXPORTER_OTLP)
-        exporters.add(EXPORTER_OTLP_SPAN)
+    if _EXPORTER_OTLP in exporters:
+        exporters.remove(_EXPORTER_OTLP)
+        exporters.add(_EXPORTER_OTLP_SPAN)
 
     return list(exporters)
 
