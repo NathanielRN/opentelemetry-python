@@ -23,10 +23,7 @@ logger = getLogger(__file__)
 
 
 class OpenTelemetryConfigurator(_OTelSDKConfigurator):
-
-    # pylint: disable=no-self-use
-    def _configure(self, **kwargs):
-        super()._configure(**kwargs)
+    pass
 
 
 class OpenTelemetryDistro(BaseDistro):
