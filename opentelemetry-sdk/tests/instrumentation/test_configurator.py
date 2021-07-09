@@ -23,8 +23,8 @@ from opentelemetry.environment_variables import (
     OTEL_TRACES_EXPORTER,
 )
 from opentelemetry.sdk.instrumentation import (
-    EXPORTER_OTLP,
-    EXPORTER_OTLP_SPAN,
+    _EXPORTER_OTLP,
+    _EXPORTER_OTLP_SPAN,
     _get_exporter_names,
     _get_id_generator,
     _import_id_generator,
@@ -160,9 +160,9 @@ class TestTraceInit(TestCase):
 
 class TestExporterNames(TestCase):
     def test_otlp_exporter_overwrite(self):
-        for exporter in [EXPORTER_OTLP, EXPORTER_OTLP_SPAN]:
+        for exporter in [_EXPORTER_OTLP, _EXPORTER_OTLP_SPAN]:
             with patch.dict(environ, {OTEL_TRACES_EXPORTER: exporter}):
-                self.assertEqual(_get_exporter_names(), [EXPORTER_OTLP_SPAN])
+                self.assertEqual(_get_exporter_names(), [_EXPORTER_OTLP_SPAN])
 
     @patch.dict(environ, {OTEL_TRACES_EXPORTER: "jaeger,zipkin"})
     def test_multiple_exporters(self):
